@@ -8,6 +8,13 @@ public class DateInfo
     public int pic;
     public int rating;
 
+    public DateInfo(String name, int pic, int rating)
+    {
+        this.name = name;
+        this.pic = pic;
+        this.rating = rating;
+    }
+
     public void setName(String name)
     {
         this.name = name;
