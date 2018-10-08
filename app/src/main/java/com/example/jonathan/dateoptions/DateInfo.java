@@ -5,7 +5,7 @@ import android.media.Image;
 public class DateInfo
 {
     public String name;
-    public Image pic;
+    public int pic;
     public int rating;
 
     public void setName(String name)
@@ -18,12 +18,12 @@ public class DateInfo
         return name;
     }
 
-    public void setPic(Image pic)
+    public void setPic(int pic)
     {
         this.pic = pic;
     }
 
-    public Image getPic()
+    public int getPic()
     {
         return pic;
     }
