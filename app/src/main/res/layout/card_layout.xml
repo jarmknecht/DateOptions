@@ -27,7 +27,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/test" />
+            android:src="@drawable/laserassault" />
 
         <TextView
             android:id="@+id/txtName"
