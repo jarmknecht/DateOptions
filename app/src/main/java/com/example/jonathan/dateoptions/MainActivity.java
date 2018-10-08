@@ -11,20 +11,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-       // RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-       // recList.setHasFixedSize(true);
+        setContentView(R.layout.activity_main);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView);
+        rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        //recList.setLayoutManager(llm);
+        rv.setLayoutManager(llm);
 
-        //RecyclerAdapter ra = new RecyclerAdapter(createList(5));
-        //recList.setAdapter(ra);
+        RecyclerAdapter ra = new RecyclerAdapter(createList(5));
+        rv.setAdapter(ra);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       // getMenuInflater().inflate(R.menu, menu);
+        getMenuInflater().inflate(R.menu, menu);
         return true;
     }
 
