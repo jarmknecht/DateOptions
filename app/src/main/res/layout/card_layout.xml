@@ -39,9 +39,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/roboto_thin"
-            android:gravity="center_horizontal"
             android:text="Name"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:gravity="center_horizontal"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
