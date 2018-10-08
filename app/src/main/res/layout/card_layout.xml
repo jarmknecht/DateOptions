@@ -27,15 +27,17 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/default_cover" />
+            android:src="@drawable/test" />
 
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="153dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:gravity="center_horizontal"
             android:text="Name" />
 
@@ -44,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="181dp"
+            android:layout_marginStart="-136dp"
+            android:layout_marginTop="184dp"
             android:layout_toEndOf="@+id/txtName" />
 
 
