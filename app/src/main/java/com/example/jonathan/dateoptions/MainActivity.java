@@ -8,6 +8,8 @@ import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
+    DateApp dA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
-
-        RecyclerAdapter ra = new RecyclerAdapter(createList(5));
+        dA.getInstance().initializeData();
+        RecyclerAdapter ra = new RecyclerAdapter(dA.getInstance().getDates());
         rv.setAdapter(ra);
     }
 
