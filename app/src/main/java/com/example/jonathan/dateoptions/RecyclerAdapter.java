@@ -22,7 +22,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
         dateViewHolder.image.setImageResource(dateList.get(i).pic);
         dateViewHolder.name.setText(dateList.get(i).name);
-        dateViewHolder.rating.setNumStars(dateList.get(i).rating);
+        //dateViewHolder.rating.setNumStars(dateList.get(i).rating);
+        dateViewHolder.rating.setRating(dateList.get(i).rating);
     }
 
     @Override

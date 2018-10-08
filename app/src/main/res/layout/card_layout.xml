@@ -35,25 +35,26 @@
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/date_image"
+            android:layout_below="@+id/date_image"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/roboto_thin"
+            android:gravity="center"
             android:text="Name"
-            android:textAlignment="viewStart"
-            android:gravity="center_horizontal"/>
+            />
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="65dp"
             android:layout_marginTop="182dp"
             android:layout_marginEnd="69dp"
-            android:foregroundGravity="center_vertical|center_horizontal|fill" />
+            android:foregroundGravity="center_vertical|center_horizontal|fill"
+            android:progressTint="@color/colorAccent"
+            android:isIndicator="true"
+            android:numStars="5" />
 
 
     </RelativeLayout>
