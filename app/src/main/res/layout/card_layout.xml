@@ -12,11 +12,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="4dp"
+    android:clickable="true">
 
     <RelativeLayout
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/date_image"
@@ -37,7 +40,8 @@
             android:layout_marginTop="7dp"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center_horizontal"
-            android:text="Name" />
+            android:text="Name"
+            android:textAlignment="viewStart" />
 
         <RatingBar
             android:id="@+id/ratingBar"
