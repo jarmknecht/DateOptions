@@ -26,6 +26,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
     public DateViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                from(viewGroup.getContext()).inflate(R.layout.card_layout,
