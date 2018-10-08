@@ -18,10 +18,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         this.dateList = dateList;
     }
 
-    @Override
+    @Override //Sets the values for the card view from the data Dakota is including
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
-        DateInfo date = dateList.get(i);
-        //set the photo name and reviews
+        dateViewHolder.image.setImageResource(dateList.get(i).pic);
+        dateViewHolder.name.setText(dateList.get(i).name);
+        dateViewHolder.rating.setNumStars(dateList.get(i).rating);
     }
 
     @Override
@@ -53,5 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
     public int getItemCount() {
         return dateList.size();
     }
+
+
 
 }
