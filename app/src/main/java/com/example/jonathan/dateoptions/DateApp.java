@@ -38,7 +38,7 @@ public class DateApp
         this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, 5));
         this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 4));
         this.dates.add(new DateInfo("Fat Cats", R.drawable.fatcats, 3));
-        this.dates.add(new DateInfo("Get Out Games", R.drawable.getoutgames, 5));
+        this.dates.add(new DateInfo("Getout Games", R.drawable.getoutgames, 5));
         this.dates.add(new DateInfo("Laser Assault", R.drawable.laserassault, 5));
         this.dates.add(new DateInfo("Provo Canyon", R.drawable.provocanyon, 4));
     }
