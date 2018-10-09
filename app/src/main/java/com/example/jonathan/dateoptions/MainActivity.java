@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Handle click", "main activity");
         Intent mapIntent = new Intent(this, MapActivity.class);
         mapIntent.putExtra("ID", "HEY");
-        startActivity(mapIntent);
+        startActivity(mapIntent); //when a new map activity is made remakes cards like when it is rotated
     }
 
 }

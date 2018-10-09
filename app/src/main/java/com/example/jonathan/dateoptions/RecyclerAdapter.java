@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected ImageView image;
         protected TextView name;
         protected RatingBar rating;
+        protected RelativeLayout rl;
         public View view;
 
 
@@ -60,7 +62,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             image = (ImageView)itemView.findViewById(R.id.date_image);
             name = (TextView)itemView.findViewById(R.id.txtName);
             rating = (RatingBar)itemView.findViewById(R.id.ratingBar);
-            image.setOnClickListener(new View.OnClickListener() {
+            rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
+            rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
                     ((MainActivity)v.getContext()).HandleClick();
