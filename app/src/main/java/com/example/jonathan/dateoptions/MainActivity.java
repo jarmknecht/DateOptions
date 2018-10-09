@@ -1,9 +1,11 @@
 package com.example.jonathan.dateoptions;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
        // getMenuInflater().inflate(R.menu, menu);
         return true;
+    }
+
+    public void HandleClick() {
+        Log.i("Handle click", "main activity");
+        Intent mapIntent = new Intent(this, MapActivity.class);
+        mapIntent.putExtra("ID", "HEY");
+        startActivity(mapIntent);
     }
 
 }

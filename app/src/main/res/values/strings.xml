@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Date Options</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>
