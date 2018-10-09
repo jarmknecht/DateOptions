@@ -50,6 +50,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="scalingPercent" value="88" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -60,6 +61,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="foregroundImage" value="$USER_HOME$/Documents/Class Documents/Grad/Fall Semester 2018/CS356/Date_Pics/app_icon.png" />
                                     </map>
                                   </option>
