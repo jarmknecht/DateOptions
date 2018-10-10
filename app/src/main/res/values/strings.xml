@@ -2,5 +2,6 @@
     <string name="app_name">Date Options</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="sumbitButtion">Submit Rating</string>
 
 </resources>
