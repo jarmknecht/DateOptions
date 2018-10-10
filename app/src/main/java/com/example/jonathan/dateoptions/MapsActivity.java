@@ -1,5 +1,7 @@
 package com.example.jonathan.dateoptions;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -64,12 +67,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        int height = 200;
+        int width = 100;
+        BitmapDrawable myMarker = (BitmapDrawable)getResources().getDrawable(R.drawable.app_icon);
+        Bitmap bMap = myMarker.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(bMap, width, height, false);
         mMap = googleMap;
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         mMap.setMinZoomPreference(15);
         LatLng location = new LatLng(date.getLatitude(),date.getLongitude());
-        //change marker to be accent color
-        mMap.addMarker(new MarkerOptions().position(location).title(date.getName()));
+        mMap.addMarker(new MarkerOptions().position(location).title(date.getName()).icon
+                (BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 }

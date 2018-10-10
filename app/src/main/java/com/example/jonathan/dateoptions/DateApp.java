@@ -55,11 +55,11 @@ public class DateApp
         Ratings3.add(2);
         Ratings3.add(2);
         Ratings3.add(1);
-        this.dates.add(new DateInfo("BYU Bowling", R.drawable.byubowling, 40.247078, -111.639731, Ratings1));
-        this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, 40.250880, -111.639731, Ratings3));
-        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 40.240393, -111.660082, Ratings2));
+        this.dates.add(new DateInfo("BYU Bowling", R.drawable.byubowling, 40.248542, -111.646504, Ratings1));
+        this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, 40.250212, -111.643305, Ratings3));
+        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 40.240393, -111.661466, Ratings2));
         this.dates.add(new DateInfo("Fat Cats", R.drawable.fatcats, 40.250134, -111.657745, Ratings2));
-        this.dates.add(new DateInfo("Getout Games", R.drawable.getoutgames, 40.237622, -111.659131, Ratings1));
+        this.dates.add(new DateInfo("Getout Games", R.drawable.getoutgames, 40.237622, -111.659088, Ratings1));
         this.dates.add(new DateInfo("Laser Assault", R.drawable.laserassault, 40.237359, -111.660082, Ratings3));
         this.dates.add(new DateInfo("Provo Canyon", R.drawable.provocanyon, 40.328981, -111.633928, Ratings1));
     }
