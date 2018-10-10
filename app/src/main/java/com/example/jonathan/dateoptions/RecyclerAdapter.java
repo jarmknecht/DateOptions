@@ -21,9 +21,9 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateViewHolder> {
     private List<DateInfo> dateList;
 
-    public RecyclerAdapter(List<DateInfo> dateList) {
+    public RecyclerAdapter() {
         Log.i("recycler view", "yo");
-        this.dateList = dateList;
+        this.dateList = DateApp.getInstance().getDates();
     }
 
     @Override //Sets the values for the card view from the data Dakota is including

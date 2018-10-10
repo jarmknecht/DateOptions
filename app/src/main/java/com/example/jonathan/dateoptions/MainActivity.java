@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
         dA.getInstance().initializeData();
-        RecyclerAdapter ra = new RecyclerAdapter(dA.getInstance().getDates());
+        RecyclerAdapter ra = new RecyclerAdapter();
         rv.setAdapter(ra);
     }
 
