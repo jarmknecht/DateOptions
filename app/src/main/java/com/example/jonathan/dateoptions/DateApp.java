@@ -34,12 +34,19 @@ public class DateApp
 
     public void initializeData()
     {
-        this.dates.add(new DateInfo("BYU Bowling", R.drawable.byubowling, 4));
-        this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, 5));
-        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 4));
-        this.dates.add(new DateInfo("Fat Cats", R.drawable.fatcats, 3));
-        this.dates.add(new DateInfo("Getout Games", R.drawable.getoutgames, 5));
-        this.dates.add(new DateInfo("Laser Assault", R.drawable.laserassault, 5));
-        this.dates.add(new DateInfo("Provo Canyon", R.drawable.provocanyon, 4));
+        List<Integer> Ratings1 = new ArrayList<Integer>();
+        Ratings1.add(4);
+        Ratings1.add(3);
+        Ratings1.add(5);
+        Ratings1.add(5);
+        Ratings1.add(4);
+        Ratings1.add(1);
+        this.dates.add(new DateInfo("BYU Bowling", R.drawable.byubowling, R.drawable.brickoven, Ratings1));
+        this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, R.drawable.byumoa, Ratings1));
+        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, R.drawable.byustadium, Ratings1));
+        this.dates.add(new DateInfo("Fat Cats", R.drawable.fatcats, R.drawable.citycreek, Ratings1));
+        this.dates.add(new DateInfo("Getout Games", R.drawable.getoutgames, R.drawable.colormemine, Ratings1));
+        this.dates.add(new DateInfo("Laser Assault", R.drawable.laserassault, R.drawable.gallivan_center, Ratings1));
+        this.dates.add(new DateInfo("Provo Canyon", R.drawable.provocanyon, R.drawable.hfacexterior, Ratings1));
     }
 }
