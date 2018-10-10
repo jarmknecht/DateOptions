@@ -28,12 +28,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         rating = (RatingBar)findViewById(R.id.ratingBarMap);
         submit = (Button)findViewById(R.id.ratingButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                date.addRating((int)rating.getRating());
+                for(int i = 0; i < DateApp.getInstance().getDates().size(); i++)
+                {
+                    if(date.getName().equals(DateApp.getInstance().getDates().get(i).getName()))
+                    {
+                        DateApp.getInstance().getDates().get(i).addRating((int)rating.getRating());
+                    }
+                }
             }
         });
     }
