@@ -16,27 +16,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/colorPrimaryLight">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:text="Name"/>
-
-        <RatingBar
-            android:id="@+id/ratingBarMap"
-            android:layout_width="167dp"
-            android:layout_height="47dp"
-            android:layout_weight="1"
-            android:numStars="5"
-            android:progressTint="@color/colorAccent"/>
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sumbitButtion"
-            android:id="@+id/ratingButton"/>
+            android:orientation="horizontal">
+            <RatingBar
+                android:id="@+id/ratingBarMap"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:numStars="5"
+                android:progressTint="@color/colorAccent" />
 
+            <Button
+                android:id="@+id/ratingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sumbitButtion" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
