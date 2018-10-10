@@ -48,6 +48,8 @@
                 android:id="@+id/ratingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/sumbitButtion" />
         </LinearLayout>
     </LinearLayout>

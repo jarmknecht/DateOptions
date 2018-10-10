@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,10 +14,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.w3c.dom.Text;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private DateInfo date;
+    private TextView dateName;
     private RatingBar rating;
     private Button submit;
 
@@ -30,7 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         rating = (RatingBar)findViewById(R.id.ratingBarMap);
-        //rating.setRating(5);
+        dateName = (TextView)findViewById(R.id.textMap);
+        dateName.setText(date.getName());
         submit = (Button)findViewById(R.id.ratingButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
