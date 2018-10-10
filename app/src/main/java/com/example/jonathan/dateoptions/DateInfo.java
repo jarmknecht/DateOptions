@@ -63,14 +63,20 @@ public class DateInfo implements Serializable
 
     public List<Integer> getRatings() {return ratings;}
 
-    public void setRating(List<Integer> Ratings)
+    public void setRating(List<Integer> ratings)
     {
         int total = 0;
-        for(int i = 0; i < Ratings.size(); i++)
+        for(int i = 0; i < ratings.size(); i++)
         {
-            total += Ratings.get(i);
+            total += ratings.get(i);
         }
-        this.rating = total/Ratings.size();
+        this.rating = total/ratings.size();
+    }
+
+    public void addRating(int rating)
+    {
+        ratings.add(rating);
+        setRating(ratings);
     }
 
     public int getRating()
