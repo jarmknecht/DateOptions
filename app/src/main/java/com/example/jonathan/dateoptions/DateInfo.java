@@ -11,7 +11,7 @@ public class DateInfo
     public int pic;
     public int map_pic;
     public List<Integer> ratings;
-    public double rating;
+    public int rating;
 
     public DateInfo(String name, int pic, int map_pic, List<Integer> ratings)
     {
@@ -60,7 +60,7 @@ public class DateInfo
         this.rating = total/Ratings.size();
     }
 
-    public double getRating()
+    public int getRating()
     {
         return rating;
     }
