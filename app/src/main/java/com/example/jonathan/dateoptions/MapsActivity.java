@@ -41,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         DateApp.getInstance().getDates().get(i).addRating((int)rating.getRating());
                     }
                 }
+                finish();
             }
         });
     }
