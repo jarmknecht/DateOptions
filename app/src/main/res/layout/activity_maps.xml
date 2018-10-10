@@ -4,29 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="20dp"
     tools:context=".MapsActivity">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="450dp"></fragment>
+        android:layout_height="450dp">
+    </fragment>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:text="Name"/>
 
         <RatingBar
             android:id="@+id/ratingBarMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_width="167dp"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:progressTint="@color/colorAccent"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
