@@ -30,6 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         rating = (RatingBar)findViewById(R.id.ratingBarMap);
+        //rating.setRating(5);
         submit = (Button)findViewById(R.id.ratingButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
