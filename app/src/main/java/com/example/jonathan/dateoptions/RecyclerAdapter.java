@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 
@@ -30,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         dateViewHolder.name.setText(dateList.get(i).name);
         //dateViewHolder.rating.setNumStars(dateList.get(i).rating);
         dateViewHolder.rating.setRating(dateList.get(i).rating);
+        dateViewHolder.date = dateList.get(i);
     }
 
     @Override
@@ -52,6 +55,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected TextView name;
         protected RatingBar rating;
         protected RelativeLayout rl;
+        public DateInfo date;
         public View view;
 
 
@@ -66,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
-                    ((MainActivity)v.getContext()).HandleClick();
+                    ((MainActivity)v.getContext()).HandleClick(date);
                 }
             });
 

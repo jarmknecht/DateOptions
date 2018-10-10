@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private DateInfo date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         mMap.setMinZoomPreference(15);
-        LatLng getoutgames = new LatLng(40.237622, -111.659088);
+        LatLng location = new LatLng(date.getLatitude(),date.getLongitude());
         //change marker to be accent color
-        mMap.addMarker(new MarkerOptions().position(getoutgames).title("Getout Games"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(getoutgames));
+        mMap.addMarker(new MarkerOptions().position(location).title(date.getName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 }

@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void HandleClick() {
+    public void HandleClick(DateInfo date) {
         Log.i("Handle click", "main activity");
         Intent mapIntent = new Intent(this, MapsActivity.class);
-        mapIntent.putExtra("ID", "HEY");
+        mapIntent.putExtra("serialize_data", date);
         startActivity(mapIntent); //when a new map activity is made remakes cards like when it is rotated
     }
 
