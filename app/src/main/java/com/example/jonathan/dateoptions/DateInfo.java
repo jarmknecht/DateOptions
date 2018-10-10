@@ -9,15 +9,17 @@ public class DateInfo
 {
     public String name;
     public int pic;
-    public int map_pic;
     public List<Integer> ratings;
+    public double latitude;
+    public double longitude;
     public int rating;
 
-    public DateInfo(String name, int pic, int map_pic, List<Integer> ratings)
+    public DateInfo(String name, int pic, double latitude, double longitude, List<Integer> ratings)
     {
         this.name = name;
         this.pic = pic;
-        this.map_pic = map_pic;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.ratings = ratings;
         setRating(ratings);
     }
@@ -42,9 +44,19 @@ public class DateInfo
         return pic;
     }
 
-    public void setMap_pic(int map_pic) {this.map_pic = map_pic;}
+    public void setLatitude(double latitude) {this.latitude = latitude;}
 
-    public int getMap_pic() {return map_pic;}
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 
     public void setRatings(List<Integer> ratings) {this.ratings = ratings;}
 
