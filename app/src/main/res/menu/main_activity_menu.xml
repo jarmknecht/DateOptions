@@ -4,16 +4,13 @@
     android:id="@+id/menu">
     <item android:id="@+id/search"
         android:icon="@drawable/search"
-        android:iconTint="@color/white"
         app:showAsAction="ifRoom"
         android:title="@string/search"/>
     <item android:id="@+id/filter"
         android:icon="@drawable/filter"
-        android:iconTint="@color/white"
         app:showAsAction="ifRoom"
         android:title="@string/filter"/>
     <item android:id="@+id/settings"
-        android:iconTint="@color/white"
         android:icon="@drawable/settings"
         app:showAsAction="ifRoom"
         android:title="@string/settings" />
