@@ -64,10 +64,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap smallMarker = Bitmap.createScaledBitmap(bMap, width, height, false);
         mMap = googleMap;
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
-        mMap.setMinZoomPreference(19);
         LatLng location = new LatLng(date.getLatitude(),date.getLongitude());
         mMap.addMarker(new MarkerOptions().position(location).title(date.getName()).icon
-                (BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                (BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 }
