@@ -67,7 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             name = (TextView)itemView.findViewById(R.id.txtName);
             rating = (RatingBar)itemView.findViewById(R.id.ratingBar);
             rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
-            image.setOnClickListener(new View.OnClickListener() {
+            rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     //Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
                     ((MainActivity)v.getContext()).HandleClick(date);
