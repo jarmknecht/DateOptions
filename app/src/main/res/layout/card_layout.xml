@@ -55,6 +55,7 @@
             android:layout_centerHorizontal="true"
             android:isIndicator="true"
             android:numStars="5"
+            android:clickable="true"
             android:progressTint="@color/colorAccent" />
 
 

@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:stepSize="0.1"
+                android:stepSize="0.5"
                 android:progressTint="@color/colorAccent" />
 
             <Button
@@ -49,8 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbutton"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/sumbitButtion" />
+                android:text="@string/sumbitButtion"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
     </LinearLayout>
 
