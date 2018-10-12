@@ -1,10 +1,10 @@
 package com.example.jonathan.dateoptions;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DateApp
-{
+public class DateApp {
     public static DateApp dA;
     private List<DateInfo> dates;
 
