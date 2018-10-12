@@ -8,9 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Handle click", "main activity");
         Intent mapIntent = new Intent(this, MapsActivity.class);
         mapIntent.putExtra("serialize_data", date);
-        startActivity(mapIntent); //when a new map activity is made remakes cards like when it is rotated
+        startActivity(mapIntent);
     }
 
 }
