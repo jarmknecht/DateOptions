@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +57,23 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                //search();
+                return true;
+            case R.id.filter:
+                //filter();
+                return true;
+            case R.id.settings:
+                //settings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void HandleClick(DateInfo date) {
