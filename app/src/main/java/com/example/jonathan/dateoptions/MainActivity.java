@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void search() {
         oldList = ra.getDates();
-        searchView.setQueryHint("\"Look for whole word\"");
+        searchView.setQueryHint("\"Search phrase\"");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -100,8 +100,13 @@ public class MainActivity extends AppCompatActivity {
                 if (lowercaseQuery.charAt(0) == '"') {
                     String substring = lowercaseQuery.substring(1, lowercaseQuery.length() - 1);
                     for (int i = 0; i < oldList.size(); i++) {
-                        if (oldList.get(i).getName().toLowerCase().matches(substring)) {
-                           newList.add(oldList.get(i));
+                        String name = oldList.get(i).getName().toLowerCase();
+                        String[] splited = name.split("\\s+");
+                        for (int j = 0; j < splited.length; j++) {
+                            String splitName = splited[j];
+                            if (splitName.matches(substring)) {
+                                newList.add(oldList.get(i));
+                            }
                         }
                     }
                 }
