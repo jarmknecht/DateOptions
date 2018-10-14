@@ -1,9 +1,7 @@
 package com.example.jonathan.dateoptions;
 
-import android.media.Image;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DateInfo implements Serializable
