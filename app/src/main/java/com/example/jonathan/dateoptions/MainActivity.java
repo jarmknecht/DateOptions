@@ -10,7 +10,6 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ActionMenuView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -68,7 +67,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                rv = (RecyclerView) findViewById(R.id.recyclerView);
+                rv.setHasFixedSize(true);
+                llm = new LinearLayoutManager(getBaseContext());
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                rv.setLayoutManager(llm);
+                ra = new RecyclerAdapter();
+                rv.setAdapter(ra);
+                return true;
+            }
+        });
         return true;
     }
 
@@ -91,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void search() {
         oldList = ra.getDates();
-        searchView.setQueryHint("\"Search phrase\"");
+        newList.clear();
+        set.clear();
+        searchView.setQueryHint("Find \"phrase\" | letter");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getBaseContext(), query, Toast.LENGTH_LONG).show();
                 String lowercaseQuery = query.toLowerCase();
                 if (lowercaseQuery.charAt(0) == '"') {
                     String substring = lowercaseQuery.substring(1, lowercaseQuery.length() - 1);
@@ -142,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void HandleClick(DateInfo date) {
         Log.i("Handle click", "main activity");
