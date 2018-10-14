@@ -1,5 +1,6 @@
 package com.example.jonathan.dateoptions;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,16 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateViewHolder> {
     private List<DateInfo> dateList;
 
     public RecyclerAdapter() {
-        Log.i("recycler view", "yo");
         this.dateList = DateApp.getInstance().getDates();
     }
+
+    public RecyclerAdapter(List<DateInfo> searchDates) {
+        this.dateList = searchDates;
+    }
+
 
     @Override //Sets the values for the card view from the data Dakota is including
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
@@ -46,6 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
 
         return new DateViewHolder(itemView);
     }
+
 
     public static class DateViewHolder extends RecyclerView.ViewHolder {
         protected CardView cv;
@@ -78,6 +87,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
     @Override
     public int getItemCount() {
         return dateList.size();
+    }
+
+    public List<DateInfo> getDates() {
+        return dateList;
     }
 
 
