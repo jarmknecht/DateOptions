@@ -14,7 +14,9 @@ import android.widget.ActionMenuView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private List<DateInfo> oldList;
     private List<DateInfo> newList = new ArrayList<>();
+    private Set<DateInfo> set = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +91,34 @@ public class MainActivity extends AppCompatActivity {
 
     private void search() {
         oldList = ra.getDates();
-        searchView.setQueryHint("Search Date Options");
+        searchView.setQueryHint("\"Look for whole word\"");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getBaseContext(), query, Toast.LENGTH_LONG).show();
-                for (int i = 0; i < oldList.size(); i++) {
-                    if (oldList.get(i).getName().toLowerCase().matches(query)) {
-                        newList.add(oldList.get(i));
+                String lowercaseQuery = query.toLowerCase();
+                if (lowercaseQuery.charAt(0) == '"') {
+                    String substring = lowercaseQuery.substring(1, lowercaseQuery.length() - 1);
+                    for (int i = 0; i < oldList.size(); i++) {
+                        if (oldList.get(i).getName().toLowerCase().matches(substring)) {
+                           newList.add(oldList.get(i));
+                        }
                     }
+                }
+                else {
+                    for (int i = 0; i < lowercaseQuery.length(); i++) {
+                        char c = lowercaseQuery.charAt(i);
+                        for (int j = 0; j < oldList.size(); j++) {
+                            for (int z = 0; z < oldList.get(j).getName().length(); z++) {
+                                String name = oldList.get(j).getName().toLowerCase();
+                                char d = name.charAt(z);
+                                if (c == d) {
+                                    set.add(oldList.get(j));
+                                }
+                            }
+                        }
+                    }
+                    newList.addAll(set);
                 }
                 rv = (RecyclerView) findViewById(R.id.recyclerView);
                 rv.setHasFixedSize(true);
@@ -105,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 rv.setLayoutManager(llm);
                 ra = new RecyclerAdapter(newList);
                 rv.setAdapter(ra);
-                //dA.setDates(newList);
+                searchView.clearFocus();
                 return true;
             }
 
