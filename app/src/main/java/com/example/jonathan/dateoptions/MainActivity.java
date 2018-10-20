@@ -10,6 +10,8 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -97,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 search();
                 return true;
             case R.id.filter:
-                //filter();
+                View menuItemView = findViewById(R.id.filter);
+                filter(menuItemView);
                 return true;
             case R.id.settings:
                 //settings();
@@ -105,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void filter(View menuItemView) {
+        PopupMenu popupMenu = new PopupMenu(this, menuItemView);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(getBaseContext(), "You clicked " + item.getTitle(), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
+
     }
 
     private void search() {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/lowToHigh"
+        android:title="@string/filter_low_to_high_ratings" />
+    <item
+        android:id="@+id/highToLow"
+        android:title="@string/high_to_low_stars"/>
+
+
+</menu>
