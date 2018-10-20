@@ -111,39 +111,32 @@ public class MainActivity extends AppCompatActivity {
         oldList = ra.getDates();
         newList.clear();
         set.clear();
-        searchView.setQueryHint("Find \"phrase\" | letter");
+        searchView.setQueryHint("Find Date Option");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 String lowercaseQuery = query.toLowerCase();
-                if (lowercaseQuery.charAt(0) == '"') {
-                    String substring = lowercaseQuery.substring(1, lowercaseQuery.length() - 1);
-                    for (int i = 0; i < oldList.size(); i++) {
-                        String name = oldList.get(i).getName().toLowerCase();
-                        String[] splited = name.split("\\s+");
-                        for (int j = 0; j < splited.length; j++) {
-                            String splitName = splited[j];
-                            if (splitName.matches(substring)) {
-                                newList.add(oldList.get(i));
-                            }
-                        }
-                    }
-                }
-                else {
-                    for (int i = 0; i < lowercaseQuery.length(); i++) {
-                        char c = lowercaseQuery.charAt(i);
-                        for (int j = 0; j < oldList.size(); j++) {
-                            for (int z = 0; z < oldList.get(j).getName().length(); z++) {
-                                String name = oldList.get(j).getName().toLowerCase();
-                                char d = name.charAt(z);
-                                if (c == d) {
-                                    set.add(oldList.get(j));
+                String[] splitedQuery = lowercaseQuery.split("\\s+");
+                for (int i = 0; i < oldList.size(); i++) {
+                    String name = oldList.get(i).getName().toLowerCase();
+                    String[] splitedName = name.split("\\s+");
+                    for (int d = 0; d < splitedQuery.length; d++) {
+                        String strQuery = splitedQuery[d];
+                        int queryLength = strQuery.length();
+                        for (int j = 0; j < splitedName.length; j++) {
+                            String splitName = splitedName[j];
+                            if (queryLength > splitName.length()) {
+                                continue;
+                            } else {
+                                String substringSplitName = splitName.substring(0, queryLength);
+                                if (substringSplitName.matches(lowercaseQuery)) {
+                                    set.add(oldList.get(i));
                                 }
                             }
                         }
                     }
-                    newList.addAll(set);
                 }
+                newList.addAll(set);
                 rv = (RecyclerView) findViewById(R.id.recyclerView);
                 rv.setHasFixedSize(true);
                 llm = new LinearLayoutManager(getBaseContext());
