@@ -118,6 +118,46 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Toast.makeText(getBaseContext(), "You clicked " + item.getTitle(), Toast.LENGTH_LONG).show();
+                if (item.getTitle().toString().matches("Low to High Stars")) {
+                    oldList = ra.getDates();
+                    newList.clear();
+                    for (int r = 1; r <= 5; r++) {
+                        for (int i = 0; i < oldList.size(); i++) {
+                            if (oldList.get(i).getRating() == r) {
+                                newList.add(oldList.get(i));
+                            }
+                        }
+                    }
+                    rv = (RecyclerView) findViewById(R.id.recyclerView);
+                    rv.setHasFixedSize(true);
+                    llm = new LinearLayoutManager(getBaseContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(llm);
+                    ra = new RecyclerAdapter(newList);
+                    rv.setAdapter(ra);
+                    return true;
+                }
+
+                if (item.getTitle().toString().matches("High to Low Stars")) {
+                    oldList = ra.getDates();
+                    newList.clear();
+                    for (int r = 5; r > 0; r--) {
+                        for (int i = 0; i < oldList.size(); i++) {
+                            if (oldList.get(i).getRating() == r) {
+                                newList.add(oldList.get(i));
+                            }
+                        }
+                    }
+                    rv = (RecyclerView) findViewById(R.id.recyclerView);
+                    rv.setHasFixedSize(true);
+                    llm = new LinearLayoutManager(getBaseContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(llm);
+                    ra = new RecyclerAdapter(newList);
+                    rv.setAdapter(ra);
+                    return true;
+                }
+
                 return true;
             }
         });

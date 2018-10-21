@@ -21,16 +21,16 @@ import java.util.ListIterator;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateViewHolder> {
+
     private List<DateInfo> dateList;
 
     public RecyclerAdapter() {
         this.dateList = DateApp.getInstance().getDates();
     }
 
-    public RecyclerAdapter(List<DateInfo> searchDates) {
-        this.dateList = searchDates;
+    public RecyclerAdapter(List<DateInfo> infoList) {
+        this.dateList = infoList;
     }
-
 
     @Override //Sets the values for the card view from the data Dakota is including
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
@@ -93,6 +93,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         return dateList;
     }
 
-
+    public void setDateList(List<DateInfo> dateList) {
+        this.dateList = dateList;
+    }
 
 }
