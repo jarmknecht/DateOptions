@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private List<DateInfo> oldList;
     private List<DateInfo> newList = new ArrayList<>();
+    private List<DateInfo> searchList = new ArrayList<>();
     private Set<DateInfo> set = new HashSet<>();
 
     @Override
@@ -119,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 //Toast.makeText(getBaseContext(), "You clicked " + item.getTitle(), Toast.LENGTH_LONG).show();
                 if (item.getTitle().toString().matches("Low to High Stars")) {
-                    //oldList = ra.getDates();
-                    oldList = dA.getInstance().getDates();
+                    oldList = new ArrayList<>((DateApp.getInstance().getDates()));
                     newList.clear();
                     for (int r = 1; r <= 5; r++) {
                         for (int i = 0; i < oldList.size(); i++) {
@@ -135,14 +135,13 @@ public class MainActivity extends AppCompatActivity {
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
                     rv.setLayoutManager(llm);
                     ra = new RecyclerAdapter(newList);
-                    dA.getInstance().setDates(newList); // not really setting dates why??
+                    DateApp.getInstance().setDates(newList);
                     rv.setAdapter(ra);
                     return true;
                 }
 
                 if (item.getTitle().toString().matches("High to Low Stars")) {
-                    //oldList = ra.getDates();
-                    oldList = dA.getInstance().getDates();
+                    oldList = new ArrayList<>((DateApp.getInstance().getDates()));
                     newList.clear();
                     for (int r = 5; r > 0; r--) {
                         for (int i = 0; i < oldList.size(); i++) {
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
                     rv.setLayoutManager(llm);
                     ra = new RecyclerAdapter(newList);
-                    //dA.getInstance().setDates(newList);
+                    DateApp.getInstance().setDates(newList);
                     rv.setAdapter(ra);
                     return true;
                 }
@@ -169,11 +168,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void search() {
-        //oldList = ra.getDates();
-        oldList = dA.getInstance().getDates();
-        newList.clear();
+        oldList = new ArrayList<>((DateApp.getInstance().getDates()));
+        searchList.clear();
         set.clear();
-        searchView.setQueryHint("Find Date Option");
+        searchView.setQueryHint("Find Date Option"); //clicking on any menu item makes da getDates 0??
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -192,19 +190,28 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 String substringSplitName = splitName.substring(0, queryLength);
                                 if (substringSplitName.matches(lowercaseQuery)) {
-                                    set.add(oldList.get(i));
+                                    //set.add(oldList.get(i));
+                                    int timesSeen = 0;
+                                    for (int z = 0; z < searchList.size(); z++) {
+                                        if (searchList.get(z).getName().toLowerCase().matches(name)) {
+                                            timesSeen++;
+                                        }
+                                    }
+                                    if (timesSeen == 0) {
+                                       searchList.add(oldList.get(i));
+                                    }
                                 }
                             }
                         }
                     }
                 }
-                newList.addAll(set);
+                //searchList.addAll(set);
                 rv = (RecyclerView) findViewById(R.id.recyclerView);
                 rv.setHasFixedSize(true);
                 llm = new LinearLayoutManager(getBaseContext());
                 llm.setOrientation(LinearLayoutManager.VERTICAL);
                 rv.setLayoutManager(llm);
-                ra = new RecyclerAdapter(newList);
+                ra = new RecyclerAdapter(searchList);
                 rv.setAdapter(ra);
                 searchView.clearFocus();
                 return true;
