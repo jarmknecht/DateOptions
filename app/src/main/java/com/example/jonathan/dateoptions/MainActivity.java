@@ -117,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(getBaseContext(), "You clicked " + item.getTitle(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "You clicked " + item.getTitle(), Toast.LENGTH_LONG).show();
                 if (item.getTitle().toString().matches("Low to High Stars")) {
-                    oldList = ra.getDates();
+                    //oldList = ra.getDates();
+                    oldList = dA.getInstance().getDates();
                     newList.clear();
                     for (int r = 1; r <= 5; r++) {
                         for (int i = 0; i < oldList.size(); i++) {
@@ -134,12 +135,14 @@ public class MainActivity extends AppCompatActivity {
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
                     rv.setLayoutManager(llm);
                     ra = new RecyclerAdapter(newList);
+                    dA.getInstance().setDates(newList); // not really setting dates why??
                     rv.setAdapter(ra);
                     return true;
                 }
 
                 if (item.getTitle().toString().matches("High to Low Stars")) {
-                    oldList = ra.getDates();
+                    //oldList = ra.getDates();
+                    oldList = dA.getInstance().getDates();
                     newList.clear();
                     for (int r = 5; r > 0; r--) {
                         for (int i = 0; i < oldList.size(); i++) {
@@ -154,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     llm.setOrientation(LinearLayoutManager.VERTICAL);
                     rv.setLayoutManager(llm);
                     ra = new RecyclerAdapter(newList);
+                    //dA.getInstance().setDates(newList);
                     rv.setAdapter(ra);
                     return true;
                 }
@@ -165,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void search() {
-        oldList = ra.getDates();
+        //oldList = ra.getDates();
+        oldList = dA.getInstance().getDates();
         newList.clear();
         set.clear();
         searchView.setQueryHint("Find Date Option");
