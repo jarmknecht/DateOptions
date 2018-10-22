@@ -2,12 +2,13 @@
     <string name="app_name">Date Options</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_maps">Map</string>
-    <string name="sumbitButtion">Submit Rating</string>
+    <string name="sumbitButtion">Submit Review</string>
     <string name="settings">Settings</string>
     <string name="filter">Filter</string>
     <string name="search">Search</string>
     <string name="filter_low_to_high_ratings">Low to High Stars</string>
     <string name="high_to_low_stars">High to Low Stars</string>
+    <string name="to_top_of_list">To Top of List</string>
 
 
 </resources>

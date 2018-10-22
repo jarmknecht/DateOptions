@@ -37,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         rating = (RatingBar)findViewById(R.id.ratingBarMap);
+        rating.setRating(date.getRating());
         dateName = (TextView)findViewById(R.id.textMap);
         dateName.setText(date.getName());
         submit = (Button)findViewById(R.id.ratingButton);
@@ -57,8 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        int height = 200;
-        int width = 100;
+        int height = 300;
+        int width = 150;
         BitmapDrawable myMarker = (BitmapDrawable)getResources().getDrawable(R.drawable.app_icon);
         Bitmap bMap = myMarker.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(bMap, width, height, false);

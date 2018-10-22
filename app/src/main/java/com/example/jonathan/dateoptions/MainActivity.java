@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 View menuItemView = findViewById(R.id.filter);
                 filter(menuItemView);
                 return true;
-            case R.id.settings:
+            //case R.id.settings:
                 //settings();
+            case R.id.topOfList:
+                llm.scrollToPositionWithOffset(0,0);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
