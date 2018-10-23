@@ -65,7 +65,7 @@ public class DateApp {
         this.dates.add(new DateInfo("BYU Creamery", R.drawable.byucreamery, 40.250212, -111.643305, Ratings3, "Overhyped ice cream"));
         this.dates.add(new DateInfo("BYU Museum of Art", R.drawable.byumoa, 40.250880, -111.647951, Ratings3, "Come look at paintings of Jesus"));
         this.dates.add(new DateInfo("BYU Tennis Courts", R.drawable.tenniscourts, 40.245712, -111.655190, Ratings3, "Come hit some balls"));
-        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 40.240393, -111.661466, Ratings2, "In case your too lazy to make your own"));
+        this.dates.add(new DateInfo("Chip Cookies", R.drawable.chipcookies, 40.240393, -111.661466, Ratings2, "In case you're too lazy to make your own"));
         this.dates.add(new DateInfo("City Creek Center", R.drawable.citycreek, 40.768448, -111.891859, Ratings1, "A date place"));
         this.dates.add(new DateInfo("Color Me Mine", R.drawable.colormemine, 40.301466, -111.657655, Ratings2, "Is this an art place?"));
         this.dates.add(new DateInfo("Fat Cats", R.drawable.fatcats, 40.250134, -111.657745, Ratings2, "Bowling AND Costa Vida. 10/10"));
