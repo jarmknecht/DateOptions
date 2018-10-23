@@ -26,6 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView dateName;
     private RatingBar rating;
     private Button submit;
+    private TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         rating.setRating(date.getRating());
         dateName = (TextView)findViewById(R.id.textMap);
         dateName.setText(date.getName());
+        description = (TextView)findViewById(R.id.descriptionMap);
+        description.setText(date.getDescription());
         submit = (Button)findViewById(R.id.ratingButton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -39,6 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         //dateViewHolder.rating.setNumStars(dateList.get(i).rating);
         dateViewHolder.rating.setRating(dateList.get(i).rating);
         dateViewHolder.date = dateList.get(i);
+        dateViewHolder.description.setText(dateList.get(i).getDescription());
     }
 
     @Override
@@ -62,6 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected TextView name;
         protected RatingBar rating;
         protected RelativeLayout rl;
+        protected TextView description;
         public DateInfo date;
         public View view;
 
@@ -73,6 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             image = (ImageView)itemView.findViewById(R.id.date_image);
             name = (TextView)itemView.findViewById(R.id.txtName);
             rating = (RatingBar)itemView.findViewById(R.id.ratingBar);
+            description = (TextView)itemView.findViewById(R.id.description);
             rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
