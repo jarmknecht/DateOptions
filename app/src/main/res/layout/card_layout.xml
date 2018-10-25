@@ -19,7 +19,8 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryLight">
+        android:background="@color/colorPrimaryLight"
+        android:animateLayoutChanges="true">
 
         <ImageView
             android:id="@+id/date_image"
@@ -65,6 +66,32 @@
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/review1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingBar"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="review"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/review2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review1"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="review"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="12sp"
+            android:visibility="gone"/>
 
 
     </RelativeLayout>

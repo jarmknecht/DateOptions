@@ -40,6 +40,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         dateViewHolder.rating.setRating(dateList.get(i).rating);
         dateViewHolder.date = dateList.get(i);
         dateViewHolder.description.setText(dateList.get(i).getDescription());
+        dateViewHolder.review1.setText(dateList.get(i).getReviews().get(0));
+        dateViewHolder.review2.setText(dateList.get(i).getReviews().get(1));
     }
 
     @Override
@@ -64,6 +66,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected RatingBar rating;
         protected RelativeLayout rl;
         protected TextView description;
+        protected TextView review1;
+        protected TextView review2;
         public DateInfo date;
         public View view;
 
@@ -76,11 +80,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             name = (TextView)itemView.findViewById(R.id.txtName);
             rating = (RatingBar)itemView.findViewById(R.id.ratingBar);
             description = (TextView)itemView.findViewById(R.id.description);
+            review1 = (TextView)itemView.findViewById(R.id.review1);
+            review2 = (TextView)itemView.findViewById(R.id.review2);
             rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
-            rl.setOnClickListener(new View.OnClickListener() {
+            image.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     //Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
                     ((MainActivity)v.getContext()).HandleClick(date);
+                }
+            });
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(review1.getVisibility() == View.GONE)
+                    {
+                        review1.setVisibility(View.VISIBLE);
+                        review2.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        review1.setVisibility(View.GONE);
+                        review2.setVisibility(View.GONE);
+                    }
                 }
             });
 
