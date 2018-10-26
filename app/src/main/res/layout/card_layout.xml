@@ -84,6 +84,32 @@
             android:numStars="5"
             android:progressTint="@color/colorAccent" />
 
+        <ImageView
+            android:id="@+id/expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/miNum"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            card_view:srcCompat="@drawable/expand" />
+
+        <ImageView
+            android:id="@+id/unexpand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/miNum"
+            android:layout_alignParentEnd="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            card_view:srcCompat="@drawable/unexpand"
+            android:visibility="gone"/>
+
+
         <TextView
             android:id="@+id/review1"
             android:layout_width="wrap_content"
@@ -108,9 +134,12 @@
             android:text="review"
             android:textAlignment="center"
             android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="12sp"
             android:visibility="gone" />
+
+
 
 
     </RelativeLayout>

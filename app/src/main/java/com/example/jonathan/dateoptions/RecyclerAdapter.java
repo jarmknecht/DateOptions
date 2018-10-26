@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -70,6 +71,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected TextView review1;
         protected TextView review2;
         protected TextView miles;
+        protected ImageView expand;
+        protected ImageView unexpand;
         public DateInfo date;
         public View view;
 
@@ -86,25 +89,39 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             review2 = (TextView)itemView.findViewById(R.id.review2);
             miles = (TextView)itemView.findViewById(R.id.miNum);
             rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
-            image.setOnClickListener(new View.OnClickListener() {
+            expand = (ImageView)itemView.findViewById(R.id.expand);
+            unexpand = (ImageView)itemView.findViewById(R.id.unexpand);
+            rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     //Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
                     ((MainActivity)v.getContext()).HandleClick(date);
                 }
             });
-            rl.setOnClickListener(new View.OnClickListener() {
+            expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(review1.getVisibility() == View.GONE)
                     {
                         review1.setVisibility(View.VISIBLE);
                         review2.setVisibility(View.VISIBLE);
+                        expand.setVisibility(View.GONE);
+                        unexpand.setVisibility(View.VISIBLE);
+
                     }
-                    else
+
+                }
+            });
+            unexpand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(review1.getVisibility() == View.VISIBLE)
                     {
                         review1.setVisibility(View.GONE);
                         review2.setVisibility(View.GONE);
+                        unexpand.setVisibility(View.GONE);
+                        expand.setVisibility(View.VISIBLE);
                     }
+
                 }
             });
 

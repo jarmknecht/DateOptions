@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_upward_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_expand_less_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,7 +34,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="imageAsset" value="$USER_HOME$/Documents/Class Documents/Grad/Fall Semester 2018/CS356/Date_Pics/provoCANYON.png" />
-                                      <entry key="outputName" value="totop" />
+                                      <entry key="outputName" value="unexpand" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="ffc107" />
                                     </map>
