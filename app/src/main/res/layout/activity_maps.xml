@@ -32,7 +32,7 @@
             android:id="@+id/linverMap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@color/colorPrimaryLight"
             android:orientation="vertical">
 
@@ -43,6 +43,7 @@
                 android:layout_gravity="center"
                 android:text="Name"
                 android:textAlignment="center"
+                android:paddingTop="11dp"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="22sp" />
 
@@ -53,6 +54,7 @@
                 android:layout_gravity="center"
                 android:text="Description"
                 android:textAlignment="center"
+                android:paddingTop="11dp"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="15sp" />
 
@@ -63,6 +65,7 @@
                 android:layout_gravity="center"
                 android:text="1000 mi away"
                 android:textAlignment="center"
+                android:paddingTop="11dp"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="13sp" />
 
@@ -88,7 +91,8 @@
                 android:clickable="true"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:paddingBottom="8dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="23dp"
                 android:progressTint="@color/colorAccent" />
 
             <Button
