@@ -47,22 +47,31 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        checkLocationPermission();
-
 
         if (savedInstanceState == null) {
-            rv = (RecyclerView) findViewById(R.id.recyclerView);
+            dA.getInstance().initializeData();
+            /*rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
             llm = new LinearLayoutManager(this);
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(llm);
             dA.getInstance().initializeData();
             ra = new RecyclerAdapter();
-            rv.setAdapter(ra);
+            rv.setAdapter(ra);*/
+        }
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, this);
         }
         else {
+            checkLocationPermission();
+        }
+        
+        /*else {
             rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
             llm = new LinearLayoutManager(this);
@@ -70,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             rv.setLayoutManager(llm);
             ra = new RecyclerAdapter();
             rv.setAdapter(ra);
-        }
+        }*/
     }
 
 
@@ -172,8 +181,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 View menuItemView = findViewById(R.id.filter);
                 filter(menuItemView);
                 return true;
-            //case R.id.settings:
-                //settings();
             case R.id.topOfList:
                 llm.scrollToPositionWithOffset(0,0);
                 return true;
@@ -308,11 +315,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         for (int i = 0; i < DateApp.getInstance().getDates().size(); i++) {
             DateApp.getInstance().getDates().get(i).setMiles(latitude, longitude);
         }
-        //Toast.makeText(this, "Latitude " + latitude, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, "Longitude " + longitude, Toast.LENGTH_LONG).show();
         rv = (RecyclerView) findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
-        llm = new LinearLayoutManager(getBaseContext());
+        llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
         ra = new RecyclerAdapter();
