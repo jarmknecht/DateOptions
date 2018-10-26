@@ -1,7 +1,10 @@
 package com.example.jonathan.dateoptions;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +22,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -28,6 +34,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button submit;
     private TextView description;
     private TextView miles;
+    private String escapedQuery = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         rating.setRating(date.getRating());
         dateName = (TextView)findViewById(R.id.textMap);
         dateName.setText(date.getName());
+        dateName.setPaintFlags(dateName.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         description = (TextView)findViewById(R.id.descriptionMap);
         description.setText(date.getDescription());
         miles = (TextView)findViewById(R.id.miNumMap);
@@ -59,6 +67,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 }
                 finish();
+            }
+        });
+        dateName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    escapedQuery = URLEncoder.encode(date.getName(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                Uri uri = Uri.parse("http://www.google.com/#q=" + escapedQuery);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
     }

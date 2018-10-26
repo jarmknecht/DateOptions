@@ -44,8 +44,10 @@
                 android:text="Name"
                 android:textAlignment="center"
                 android:paddingTop="11dp"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textSize="22sp" />
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                android:clickable="true"
+                android:textStyle="bold|italic"/>
 
             <TextView
                 android:id="@+id/descriptionMap"
