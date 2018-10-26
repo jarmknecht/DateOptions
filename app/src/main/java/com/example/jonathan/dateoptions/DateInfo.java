@@ -13,10 +13,11 @@ public class DateInfo implements Serializable
     public double latitude;
     public double longitude;
     public int rating;
+    public int miles;
     public String description;
     public List<String> reviews;
 
-    public DateInfo(String name, int pic, double latitude, double longitude, List<Integer> ratings, String description, List<String> reviews)
+    public DateInfo(String name, int pic, double latitude, double longitude, List<Integer> ratings, String description, List<String> reviews, int miles)
     {
         this.name = name;
         this.pic = pic;
@@ -25,8 +26,15 @@ public class DateInfo implements Serializable
         this.ratings = ratings;
         this.description = description;
         this.reviews = reviews;
+        this.miles = miles;
         setRating(ratings);
     }
+
+    public void setMiles(double myLatitude, double myLogitude) {
+
+    }
+
+    public int getMiles() {return this.miles;}
 
     public void setName(String name)
     {

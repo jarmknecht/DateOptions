@@ -9,6 +9,9 @@
     <string name="filter_low_to_high_ratings">Low to High Stars</string>
     <string name="high_to_low_stars">High to Low Stars</string>
     <string name="to_top_of_list">To Top of List</string>
+    <string name="ok">OK</string>
+    <string name="title_location_permission">Request Location</string>
+    <string name="text_location_permission">Date Options needs your location to work fully</string>
 
 
 </resources>

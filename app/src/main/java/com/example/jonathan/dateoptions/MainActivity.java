@@ -1,7 +1,18 @@
 package com.example.jonathan.dateoptions;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +26,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private List<DateInfo> oldList;
     private List<DateInfo> newList = new ArrayList<>();
     private List<DateInfo> searchList = new ArrayList<>();
-    private Set<DateInfo> set = new HashSet<>();
+    public double latitude;
+    public double longitude;
+    public LocationManager locationManager;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +65,97 @@ public class MainActivity extends AppCompatActivity {
             rv.setLayoutManager(llm);
             ra = new RecyclerAdapter();
             rv.setAdapter(ra);
+        }
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            checkLocationPermission();
+        }
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        System.out.print("Latitude, " + latitude);
+        System.out.print("Longitude, " + longitude);
+        Toast.makeText(this, "Latitude " + latitude, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Longitude " + longitude, Toast.LENGTH_LONG).show();
+
+    }
+
+    private void checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_location_permission)
+                        .setMessage(R.string.text_location_permission)
+                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                ActivityCompat.requestPermissions(MainActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+            else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+                        final LocationListener locationListener = new LocationListener() {
+                            @Override
+                            public void onLocationChanged(Location location) {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                                System.out.print("Latitude, " + latitude);
+                                System.out.print("Longitude, " + longitude);
+
+                            }
+
+                            @Override
+                            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                            }
+
+                            @Override
+                            public void onProviderEnabled(String provider) {
+
+                            }
+
+                            @Override
+                            public void onProviderDisabled(String provider) {
+
+                            }
+                        };
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+                    }
+                }
+            }
         }
     }
 
@@ -172,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
     private void search() {
         oldList = new ArrayList<>((DateApp.getInstance().getDates()));
         searchList.clear();
-        set.clear();
         searchView.setQueryHint("Find Date Option"); //clicking on any menu item makes da getDates 0??
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -192,7 +294,6 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 String substringSplitName = splitName.substring(0, queryLength);
                                 if (substringSplitName.matches(lowercaseQuery)) {
-                                    //set.add(oldList.get(i));
                                     int timesSeen = 0;
                                     for (int z = 0; z < searchList.size(); z++) {
                                         if (searchList.get(z).getName().toLowerCase().matches(name)) {
@@ -207,7 +308,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-                //searchList.addAll(set);
                 rv = (RecyclerView) findViewById(R.id.recyclerView);
                 rv.setHasFixedSize(true);
                 llm = new LinearLayoutManager(getBaseContext());

@@ -39,6 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         //dateViewHolder.rating.setNumStars(dateList.get(i).rating);
         dateViewHolder.rating.setRating(dateList.get(i).rating);
         dateViewHolder.date = dateList.get(i);
+        dateViewHolder.miles.setText((dateList.get(i).getMiles() + " mi away"));
         dateViewHolder.description.setText(dateList.get(i).getDescription());
         dateViewHolder.review1.setText(dateList.get(i).getReviews().get(0));
         dateViewHolder.review2.setText(dateList.get(i).getReviews().get(1));
@@ -68,6 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         protected TextView description;
         protected TextView review1;
         protected TextView review2;
+        protected TextView miles;
         public DateInfo date;
         public View view;
 
@@ -82,6 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             description = (TextView)itemView.findViewById(R.id.description);
             review1 = (TextView)itemView.findViewById(R.id.review1);
             review2 = (TextView)itemView.findViewById(R.id.review2);
+            miles = (TextView)itemView.findViewById(R.id.miNum);
             rl = (RelativeLayout)itemView.findViewById(R.id.cardView);
             image.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
