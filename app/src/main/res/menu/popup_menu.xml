@@ -6,6 +6,20 @@
     <item
         android:id="@+id/highToLow"
         android:title="@string/high_to_low_stars"/>
-
+    <item
+        android:title="@string/_5_mi_away"
+        android:id="@+id/fivemi" />
+    <item
+        android:title="@string/_10_mi_away"
+        android:id="@+id/tenmi" />
+    <item
+        android:title="@string/_25_mi_away"
+        android:id="@+id/twentyfivemi" />
+    <item
+        android:title="@string/_50_mi_away"
+        android:id="@+id/fiftymi" />
+    <item
+        android:title="@string/_75_mi_away"
+        android:id="@+id/sevenfivemi" />
 
 </menu>

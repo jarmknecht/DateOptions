@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         else {
             checkLocationPermission();
         }
-        
+
         /*else {
             rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     return true;
                 }
 
-                if (item.getTitle().toString().matches("High to Low Stars")) {
+                else if (item.getTitle().toString().matches("High to Low Stars")) {
                     oldList = new ArrayList<>((DateApp.getInstance().getDates()));
                     newList.clear();
                     for (int r = 5; r > 0; r--) {
@@ -238,8 +238,47 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     rv.setAdapter(ra);
                     return true;
                 }
-
-                return true;
+                else {
+                   String itemTitle = item.getTitle().toString();
+                   int filterNumber = 0;
+                   switch (itemTitle) {
+                       case "5 mi away":
+                           filterNumber = 5;
+                           break;
+                       case "10 mi away":
+                           filterNumber = 10;
+                           break;
+                       case "25 mi away":
+                           filterNumber = 25;
+                           break;
+                       case "50 mi away":
+                           filterNumber = 50;
+                           break;
+                       case "75 mi away":
+                           filterNumber = 75;
+                           break;
+                       default:
+                           if (filterNumber == 0) {
+                               return true;
+                           }
+                   }
+                    oldList = new ArrayList<>((DateApp.getInstance().getDates()));
+                    newList.clear();
+                    for (int i = 0; i < oldList.size(); i++) {
+                        if (oldList.get(i).getMiles() <= filterNumber) {
+                            newList.add(oldList.get(i));
+                        }
+                    }
+                    rv = (RecyclerView) findViewById(R.id.recyclerView);
+                    rv.setHasFixedSize(true);
+                    llm = new LinearLayoutManager(getBaseContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(llm);
+                    ra = new RecyclerAdapter(newList);
+                    DateApp.getInstance().setDates(newList);
+                    rv.setAdapter(ra);
+                    return true;
+                }
             }
         });
 

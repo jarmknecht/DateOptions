@@ -12,6 +12,11 @@
     <string name="ok">OK</string>
     <string name="title_location_permission">Request Location</string>
     <string name="text_location_permission">Date Options needs your location to work fully</string>
+    <string name="_50_mi_away">50 mi away</string>
+    <string name="_25_mi_away">25 mi away</string>
+    <string name="_10_mi_away">10 mi away</string>
+    <string name="_5_mi_away">5 mi away</string>
+    <string name="_75_mi_away">75 mi away</string>
 
 
 </resources>
