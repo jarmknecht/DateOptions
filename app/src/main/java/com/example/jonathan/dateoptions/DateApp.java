@@ -86,7 +86,7 @@ public class DateApp {
         this.dates.add(new DateInfo("Kiwanis Park", R.drawable.kiwanispark, 40.247078, -111.639731, Ratings1, "Big Park That Has Many Fun Options", reviews1, 2));
         this.dates.add(new DateInfo("Laser Assault", R.drawable.laserassault, 40.237359, -111.660082, Ratings3, "Laser Tag", reviews1, 1));
         this.dates.add(new DateInfo("LaVell Edwards Stadium", R.drawable.byustadium, 40.257529, -111.654524, Ratings3, "BYU Football", reviews1, 1));
-        this.dates.add(new DateInfo("Lowes Xtreme Air Sports", R.drawable.lowesxtreme, 40.232232, -111.678297, Ratings3, "High Flying Fun", reviews2, 3));
+        this.dates.add(new DateInfo("Lowes Xtreme Air Sports", R.drawable.lowesxtreme, 40.232232, -111.678297, Ratings3, "High Flying Trampoline Fun", reviews2, 3));
         this.dates.add(new DateInfo("Megaplex Legacy Crossing", R.drawable.megaplexlegacy, 40.920684, -111.893080, Ratings2, "Stadium Seating Movie Theater", reviews1, 58));
         this.dates.add(new DateInfo("Natural History Museum", R.drawable.naturalhistorymuseum, 40.764362, -111.822648, Ratings1, "Explore Earth Science", reviews1, 51));
         this.dates.add(new DateInfo("Nielsen's Grove Park", R.drawable.nielsen_spark, 40.262180, -111.703240, Ratings3, "Picnic Areas and Pond", reviews1, 4));

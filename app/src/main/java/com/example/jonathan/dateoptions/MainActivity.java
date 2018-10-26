@@ -1,17 +1,20 @@
 package com.example.jonathan.dateoptions;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
+import android.database.MatrixCursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,17 +22,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-
+    AutoCompleteTextView text;
     DateApp dA;
     private LinearLayoutManager llm;
     private RecyclerView rv;
@@ -43,10 +50,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public LocationManager locationManager;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
+    private static final String[] SUGGESTIONS = {
+            "Benihana", "Bonneville Shoreline Hike", "Boondocks",
+            "Brick Oven", "BYU Bowling", "BYU Creamery", "BYU Museum of Art",
+            "BYU Tennis Courts", "Chip Cookies", "City Creek Center",
+            "Color Me Mine", "Fat Cats", "Gallivan Center", "Getout Games",
+            "Harris Fine Arts Center", "Hogle Zoo", "Kiwanis Park",
+            "Laser Assault", "LaVell Edwards Stadium", "Lowes Xtreme Air Sports",
+            "Megaplex Legacy Crossing", "Natural History Museum", "Nielsen's Grove Park",
+            "Olive Garden", "Outlets at Traverse Mountain", "Provo Canyon",
+            "Red Robin", "Rockwell Ice Cream", "South Davis Recreation Center",
+            "Sundance", "Temple Square", "The Leonardo Museum", "This is the Place Park",
+            "Wynnsong Movie Theater"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setLogo(R.drawable.app_icon);
+        actionBar.setTitle("Date Options");
 
         if (savedInstanceState == null) {
             dA.getInstance().initializeData();
@@ -147,8 +173,23 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_activity_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchComp = (SearchView) MenuItemCompat.getActionView(searchItem);
+        final SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchComp.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchAutoComplete.setDropDownBackgroundResource(android.R.color.white);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SUGGESTIONS);
+        searchAutoComplete.setAdapter(arrayAdapter);
+
+        searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String queryString = (String)parent.getItemAtPosition(position);
+                searchAutoComplete.setText("" + queryString);
+                searchView.setQuery(queryString, true);
+            }
+        });
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
@@ -173,12 +214,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        View menuItemView;
         switch (item.getItemId()) {
             case R.id.search:
                 search();
                 return true;
             case R.id.filter:
-                View menuItemView = findViewById(R.id.filter);
+                menuItemView = findViewById(R.id.filter);
                 filter(menuItemView);
                 return true;
             case R.id.topOfList:
@@ -287,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void search() {
         oldList = new ArrayList<>((DateApp.getInstance().getDates()));
         searchList.clear();
-        searchView.setQueryHint("Find Date Option"); //clicking on any menu item makes da getDates 0??
+        searchView.setQueryHint("Find Date Option");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
