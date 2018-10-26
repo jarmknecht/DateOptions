@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
     DateApp dA;
     private LinearLayoutManager llm;
@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        checkLocationPermission();
+
+
         if (savedInstanceState == null) {
             rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
@@ -66,96 +71,57 @@ public class MainActivity extends AppCompatActivity {
             ra = new RecyclerAdapter();
             rv.setAdapter(ra);
         }
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            checkLocationPermission();
-        }
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        System.out.print("Latitude, " + latitude);
-        System.out.print("Longitude, " + longitude);
-        Toast.makeText(this, "Latitude " + latitude, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "Longitude " + longitude, Toast.LENGTH_LONG).show();
-
     }
+
 
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.title_location_permission)
-                        .setMessage(R.string.text_location_permission)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int i) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-            else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],
                                            int[] grantResults) {
-        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-                        //locationManager.requestLocationUpdates(provider, 400, 1, this);
-                        final LocationListener locationListener = new LocationListener() {
-                            @Override
-                            public void onLocationChanged(Location location) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-                                System.out.print("Latitude, " + latitude);
-                                System.out.print("Longitude, " + longitude);
-
-                            }
-
-                            @Override
-                            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                            }
-
-                            @Override
-                            public void onProviderEnabled(String provider) {
-
-                            }
-
-                            @Override
-                            public void onProviderDisabled(String provider) {
-
-                            }
-                        };
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, this);
                     }
                 }
+                else {
+                    //permission denied
+                    checkLocationPermissionWithMessage();
+                }
             }
+        }
+    }
+
+    private void checkLocationPermissionWithMessage() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.title_location_permission)
+                    .setMessage(R.string.text_location_permission)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_LOCATION);
+                        }
+                    })
+                    .create()
+                    .show();
+        }
+        else {
+            checkLocationPermissionWithMessage(); //denied again
         }
     }
 
@@ -334,4 +300,37 @@ public class MainActivity extends AppCompatActivity {
         startActivity(mapIntent);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+
+        for (int i = 0; i < DateApp.getInstance().getDates().size(); i++) {
+            DateApp.getInstance().getDates().get(i).setMiles(latitude, longitude);
+        }
+        //Toast.makeText(this, "Latitude " + latitude, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Longitude " + longitude, Toast.LENGTH_LONG).show();
+        rv = (RecyclerView) findViewById(R.id.recyclerView);
+        rv.setHasFixedSize(true);
+        llm = new LinearLayoutManager(getBaseContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rv.setLayoutManager(llm);
+        ra = new RecyclerAdapter();
+        rv.setAdapter(ra);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }
