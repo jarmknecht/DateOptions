@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,20 +177,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_activity_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchComp = (SearchView) MenuItemCompat.getActionView(searchItem);
-        final SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchComp.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchAutoComplete.setDropDownBackgroundResource(android.R.color.white);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SUGGESTIONS);
-        searchAutoComplete.setAdapter(arrayAdapter);
-
-        searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String queryString = (String)parent.getItemAtPosition(position);
-                searchAutoComplete.setText("" + queryString);
-                searchView.setQuery(queryString, true);
-            }
-        });
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
@@ -217,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         View menuItemView;
         switch (item.getItemId()) {
             case R.id.search:
-                search();
+                search(item);
                 return true;
             case R.id.filter:
                 menuItemView = findViewById(R.id.filter);
@@ -326,36 +313,63 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
 
-    private void search() {
+    private void search(MenuItem item) {
+        final boolean[] clickOption = new boolean[1];
         oldList = new ArrayList<>((DateApp.getInstance().getDates()));
         searchList.clear();
         searchView.setQueryHint("Find Date Option");
+        SearchView searchComp = (SearchView) MenuItemCompat.getActionView(item);
+        final SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchComp.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchAutoComplete.setDropDownBackgroundResource(android.R.color.white);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SUGGESTIONS);
+        searchAutoComplete.setAdapter(arrayAdapter);
+
+        searchAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String queryString = (String)parent.getItemAtPosition(position);
+                searchAutoComplete.setText("" + queryString);
+                clickOption[0] = true;
+                searchView.setQuery(queryString, true);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                String lowercaseQuery = query.toLowerCase();
-                String[] splitedQuery = lowercaseQuery.split("\\s+");
-                for (int i = 0; i < oldList.size(); i++) {
-                    String name = oldList.get(i).getName().toLowerCase();
-                    String[] splitedName = name.split("\\s+");
-                    for (int d = 0; d < splitedQuery.length; d++) {
-                        String strQuery = splitedQuery[d];
-                        int queryLength = strQuery.length();
-                        for (int j = 0; j < splitedName.length; j++) {
-                            String splitName = splitedName[j];
-                            if (queryLength > splitName.length()) {
-                                continue;
-                            } else {
-                                String substringSplitName = splitName.substring(0, queryLength);
-                                if (substringSplitName.matches(lowercaseQuery)) {
-                                    int timesSeen = 0;
-                                    for (int z = 0; z < searchList.size(); z++) {
-                                        if (searchList.get(z).getName().toLowerCase().matches(name)) {
-                                            timesSeen++;
+                if (clickOption[0]) {
+                    searchList.clear();
+                    for (int i = 0; i < oldList.size(); i++) {
+                        if (oldList.get(i).getName().matches(query)) {
+                            searchList.add(oldList.get(i));
+                        }
+                    }
+                    //Toast.makeText(getBaseContext(), "you clicked " + searchView.getQuery().toString(), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    String lowercaseQuery = query.toLowerCase();
+                    String[] splitedQuery = lowercaseQuery.split("\\s+");
+                    for (int i = 0; i < oldList.size(); i++) {
+                        String name = oldList.get(i).getName().toLowerCase();
+                        String[] splitedName = name.split("\\s+");
+                        for (int d = 0; d < splitedQuery.length; d++) {
+                            String strQuery = splitedQuery[d];
+                            int queryLength = strQuery.length();
+                            for (int j = 0; j < splitedName.length; j++) {
+                                String splitName = splitedName[j];
+                                if (queryLength > splitName.length()) {
+                                    continue;
+                                } else {
+                                    String substringSplitName = splitName.substring(0, queryLength);
+                                    if (substringSplitName.matches(lowercaseQuery)) {
+                                        int timesSeen = 0;
+                                        for (int z = 0; z < searchList.size(); z++) {
+                                            if (searchList.get(z).getName().toLowerCase().matches(name)) {
+                                                timesSeen++;
+                                            }
                                         }
-                                    }
-                                    if (timesSeen == 0) {
-                                       searchList.add(oldList.get(i));
+                                        if (timesSeen == 0) {
+                                            searchList.add(oldList.get(i));
+                                        }
                                     }
                                 }
                             }
