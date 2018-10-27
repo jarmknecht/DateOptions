@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public double longitude;
     public LocationManager locationManager;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private ProgressBar spinner;
 
     private static final String[] SUGGESTIONS = {
             "Benihana", "Bonneville Shoreline Hike", "Boondocks",
@@ -69,14 +71,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setLogo(R.drawable.app_icon);
-        actionBar.setTitle("Date Options");
+        spinner = (ProgressBar) findViewById(R.id.progressSpinner);
 
         if (savedInstanceState == null) {
             dA.getInstance().initializeData();
+            spinner.setVisibility(View.VISIBLE);
             /*rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
             llm = new LinearLayoutManager(this);
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         else {
             checkLocationPermission();
         }
-
         /*else {
             rv = (RecyclerView) findViewById(R.id.recyclerView);
             rv.setHasFixedSize(true);
@@ -410,6 +409,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         for (int i = 0; i < DateApp.getInstance().getDates().size(); i++) {
             DateApp.getInstance().getDates().get(i).setMiles(latitude, longitude);
         }
+        spinner.setVisibility(View.GONE);
         rv = (RecyclerView) findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
         llm = new LinearLayoutManager(this);
