@@ -19,8 +19,8 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryLight"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:background="@color/colorPrimaryLight">
 
         <ImageView
             android:id="@+id/date_image"
@@ -38,9 +38,9 @@
             android:layout_below="@+id/date_image"
             android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="Name"
             android:textAlignment="center"
-            android:paddingTop="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="22sp" />
 
@@ -51,9 +51,9 @@
             android:layout_below="@+id/txtName"
             android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="Description"
             android:textAlignment="center"
-            android:paddingTop="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="15sp" />
 
@@ -62,11 +62,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/description"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-2dp"
+            android:layout_marginEnd="25dp"
+            android:layout_toStartOf="@+id/ratingBar"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="1000 mi away"
             android:textAlignment="center"
-            android:paddingTop="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="13sp" />
 
@@ -75,24 +77,28 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/miNum"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/description"
+            android:layout_alignEnd="@+id/date_image"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="71dp"
             android:clickable="true"
             android:isIndicator="true"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:numStars="5"
+            android:paddingTop="9dp"
+            android:paddingBottom="8dp"
             android:progressTint="@color/colorAccent" />
 
         <ImageView
             android:id="@+id/expand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/miNum"
+            android:layout_below="@+id/description"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="0dp"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingTop="8dp"
+            android:paddingRight="8dp"
             android:paddingBottom="8dp"
             card_view:srcCompat="@drawable/expand" />
 
@@ -100,14 +106,14 @@
             android:id="@+id/unexpand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/miNum"
+            android:layout_below="@+id/description"
             android:layout_alignParentEnd="true"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingTop="8dp"
+            android:paddingRight="8dp"
             android:paddingBottom="8dp"
-            card_view:srcCompat="@drawable/unexpand"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            card_view:srcCompat="@drawable/unexpand" />
 
 
         <TextView
@@ -117,12 +123,12 @@
             android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:paddingTop="8dp"
             android:text="review"
             android:textAlignment="center"
-            android:paddingTop="8dp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="12sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/review2"
@@ -131,15 +137,13 @@
             android:layout_below="@+id/review1"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="review"
-            android:textAlignment="center"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
+            android:text="review"
+            android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="12sp"
             android:visibility="gone" />
-
-
 
 
     </RelativeLayout>
