@@ -1,6 +1,7 @@
 package com.example.jonathan.dateoptions;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -312,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
 
+    @SuppressLint("RestrictedApi")
     private void search(MenuItem item) {
         final boolean[] clickOption = new boolean[1];
         oldList = new ArrayList<>((DateApp.getInstance().getDates()));
@@ -320,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         SearchView searchComp = (SearchView) MenuItemCompat.getActionView(item);
         final SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchComp.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setDropDownBackgroundResource(android.R.color.white);
+        searchAutoComplete.setThreshold(1);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SUGGESTIONS);
         searchAutoComplete.setAdapter(arrayAdapter);
 
