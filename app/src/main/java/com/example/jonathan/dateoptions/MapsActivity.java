@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, -350);
                 popupButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -85,12 +85,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         {
                             if(date.getName().equals(DateApp.getInstance().getDates().get(i).getName()))
                             {
-                                DateApp.getInstance().getDates().get(i).addRating((int)popupRating.getRating());
-                                DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
-                                popupWindow.dismiss();
+                                if (userReview.getText().toString().matches("") && popupRating.getRating() == 0.0) {
+                                    break;
+                                }
+                                else if (userReview.getText().toString().matches("")) {
+                                    DateApp.getInstance().getDates().get(i).addRating((int)popupRating.getRating());
+                                    break;
+                                }
+                                else if (popupRating.getRating() == 0.0) {
+                                    DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
+                                    break;
+                                }
+                                else {
+                                    DateApp.getInstance().getDates().get(i).addRating((int) popupRating.getRating());
+                                    DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
+                                    break;
+                                }
                             }
                         }
-                        //DateApp.getInstance().setDates(DateApp.getInstance().getDates());
+                        popupWindow.dismiss();
                         finish();
                     }
                 });

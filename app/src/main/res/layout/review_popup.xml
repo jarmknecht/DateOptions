@@ -8,7 +8,7 @@
     android:paddingLeft="11dp"
     android:paddingRight="11dp"
     android:paddingTop="11dp"
-    android:paddingBottom="11dp">
+    android:paddingBottom="25dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,8 +26,8 @@
             android:stepSize="0.5"
             android:paddingTop="11dp"
             android:numStars="5"
-            android:id="@+id/popupRating"
-            />
+            android:id="@+id/popupRating" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,16 +35,21 @@
             android:id="@+id/userReview"
             android:paddingTop="11dp"
             android:paddingBottom="11dp"
-            android:hint="Write review here"/>
+            android:ellipsize="start"
+            android:gravity="center_horizontal"
+            android:hint="@string/write_review_here"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"/>
+
         <Button
             android:id="@+id/popupButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_gravity="center"
             android:background="@drawable/roundedbutton"
             android:text="@string/sumbitButtion"
-            android:paddingTop="11dp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 

@@ -78,24 +78,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (savedInstanceState == null) {
             dA.getInstance().initializeData();
             spinner.setVisibility(View.VISIBLE);
-            /*rv = (RecyclerView) findViewById(R.id.recyclerView);
-            rv.setHasFixedSize(true);
-            llm = new LinearLayoutManager(this);
-            llm.setOrientation(LinearLayoutManager.VERTICAL);
-            rv.setLayoutManager(llm);
-            dA.getInstance().initializeData();
-            ra = new RecyclerAdapter();
-            rv.setAdapter(ra);*/
         }
-        else {
-            rv = (RecyclerView) findViewById(R.id.recyclerView);
-            rv.setHasFixedSize(true);
-            llm = new LinearLayoutManager(this);
-            llm.setOrientation(LinearLayoutManager.VERTICAL);
-            rv.setLayoutManager(llm);
-            ra = new RecyclerAdapter();
-            rv.setAdapter(ra);
-        }
+
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         if (ContextCompat.checkSelfPermission(this,
