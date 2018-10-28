@@ -10,13 +10,13 @@ public class DateInfo implements Serializable
 {
     public String name;
     public int pic;
-    public List<Integer> ratings = new ArrayList<>();
+    public List<Integer> my_ratings;
     public double latitude;
     public double longitude;
     public int rating;
     public int miles;
     public String description;
-    public List<String> reviews = new ArrayList<>();
+    public List<String> my_reviews;
 
     public DateInfo(String name, int pic, double latitude, double longitude, List<Integer> ratings, String description, List<String> reviews, int miles)
     {
@@ -24,9 +24,14 @@ public class DateInfo implements Serializable
         this.pic = pic;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.ratings = ratings;
+        my_ratings = new ArrayList<>();
+        my_ratings.add(1);
+        my_ratings.add(2);
+        my_ratings.add(3);
         this.description = description;
-        this.reviews = reviews;
+        my_reviews = new ArrayList<>();
+        my_reviews.add("Not bad");
+        my_reviews.add("Terrible");
         this.miles = miles;
         setRating(ratings);
     }
@@ -89,9 +94,9 @@ public class DateInfo implements Serializable
         return longitude;
     }
 
-    public void setRatings(List<Integer> ratings) {this.ratings = ratings;}
+    public void setRatings(List<Integer> ratings) {my_ratings = ratings;}
 
-    public List<Integer> getRatings() {return ratings;}
+    public List<Integer> getRatings() {return my_ratings;}
 
     public void setRating(List<Integer> ratings)
     {
@@ -105,8 +110,8 @@ public class DateInfo implements Serializable
 
     public void addRating(int rating)
     {
-        ratings.add(rating);
-        setRating(ratings);
+        my_ratings.add(rating);
+        setRating(my_ratings);
     }
 
     public int getRating()
@@ -126,17 +131,17 @@ public class DateInfo implements Serializable
 
     public void setReviews(List<String> reviews)
     {
-        this.reviews = reviews;
+        my_reviews = reviews;
     }
 
     public List<String> getReviews()
     {
-        return reviews;
+        return my_reviews;
     }
 
     public void addReview(String review)
     {
-        reviews.add(review);
-        setReviews(reviews);
+        my_reviews.add(review);
+        setReviews(my_reviews);
     }
 }
