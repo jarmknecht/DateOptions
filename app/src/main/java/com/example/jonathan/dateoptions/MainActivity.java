@@ -87,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             ra = new RecyclerAdapter();
             rv.setAdapter(ra);*/
         }
+        else {
+            rv = (RecyclerView) findViewById(R.id.recyclerView);
+            rv.setHasFixedSize(true);
+            llm = new LinearLayoutManager(this);
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            rv.setLayoutManager(llm);
+            ra = new RecyclerAdapter();
+            rv.setAdapter(ra);
+        }
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         if (ContextCompat.checkSelfPermission(this,
@@ -98,15 +107,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         else {
             checkLocationPermission();
         }
-        /*else {
-            rv = (RecyclerView) findViewById(R.id.recyclerView);
-            rv.setHasFixedSize(true);
-            llm = new LinearLayoutManager(this);
-            llm.setOrientation(LinearLayoutManager.VERTICAL);
-            rv.setLayoutManager(llm);
-            ra = new RecyclerAdapter();
-            rv.setAdapter(ra);
-        }*/
+
     }
 
 
