@@ -2,6 +2,7 @@ package com.example.jonathan.dateoptions;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,13 +10,13 @@ public class DateInfo implements Serializable
 {
     public String name;
     public int pic;
-    public List<Integer> ratings;
+    public List<Integer> ratings = new ArrayList<>();
     public double latitude;
     public double longitude;
     public int rating;
     public int miles;
     public String description;
-    public List<String> reviews;
+    public List<String> reviews = new ArrayList<>();
 
     public DateInfo(String name, int pic, double latitude, double longitude, List<Integer> ratings, String description, List<String> reviews, int miles)
     {
@@ -136,5 +137,6 @@ public class DateInfo implements Serializable
     public void addReview(String review)
     {
         reviews.add(review);
+        setReviews(reviews);
     }
 }

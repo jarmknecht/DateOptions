@@ -90,6 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 popupWindow.dismiss();
                             }
                         }
+                        //DateApp.getInstance().setDates(DateApp.getInstance().getDates());
                         finish();
                     }
                 });
