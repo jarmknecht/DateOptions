@@ -7,8 +7,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -35,6 +40,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView description;
     private TextView miles;
     private String escapedQuery = null;
+    private RatingBar popupRating;
+    private EditText userReview;
+    private Button popupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.review_popup, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupRating = (RatingBar)popupView.findViewById(R.id.popupRating);
+        userReview = (EditText)popupView.findViewById(R.id.userReview);
+        popupButton = (Button)popupView.findViewById(R.id.popupButton);
         rating = (RatingBar)findViewById(R.id.ratingBarMap);
         rating.setRating(date.getRating());
         dateName = (TextView)findViewById(R.id.textMap);
@@ -59,16 +77,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i = 0; i < DateApp.getInstance().getDates().size(); i++)
-                {
-                    if(date.getName().equals(DateApp.getInstance().getDates().get(i).getName()))
-                    {
-                        DateApp.getInstance().getDates().get(i).addRating((int)rating.getRating());
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                popupButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        for(int i = 0; i < DateApp.getInstance().getDates().size(); i++)
+                        {
+                            if(date.getName().equals(DateApp.getInstance().getDates().get(i).getName()))
+                            {
+                                DateApp.getInstance().getDates().get(i).addRating((int)popupRating.getRating());
+                                DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
+                                popupWindow.dismiss();
+                            }
+                        }
+                        finish();
                     }
-                }
-                finish();
+                });
             }
         });
+
         dateName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

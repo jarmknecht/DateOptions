@@ -43,8 +43,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         dateViewHolder.date = dateList.get(i);
         dateViewHolder.miles.setText((dateList.get(i).getMiles() + " mi away"));
         dateViewHolder.description.setText(dateList.get(i).getDescription());
-        dateViewHolder.review1.setText(dateList.get(i).getReviews().get(0));
-        dateViewHolder.review2.setText(dateList.get(i).getReviews().get(1));
+        dateViewHolder.review1.setText(dateList.get(i).getReviews().get(dateList.get(i).getReviews().size()-1));
+        dateViewHolder.review2.setText(dateList.get(i).getReviews().get(dateList.get(i).getReviews().size()-2));
     }
 
     @Override
