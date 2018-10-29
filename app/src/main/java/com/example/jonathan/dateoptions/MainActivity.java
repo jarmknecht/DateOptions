@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 {
                     oldList = new ArrayList<>((DateApp.getInstance().getDates()));
                     newList.clear();
-                    for(int p = 1; p <= 3; p++)
+                    for(int p = 0; p <= 3; p++)
                     {
                         for(int i = 0; i < oldList.size(); i++)
                         {
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 {
                     oldList = new ArrayList<>((DateApp.getInstance().getDates()));
                     newList.clear();
-                    for(int p = 3; p > 0; p--)
+                    for(int p = 3; p >= 0; p--)
                     {
                         for(int i = 0; i < oldList.size(); i++)
                         {
