@@ -34,11 +34,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
         this.dateList = infoList;
     }
 
-    @Override //Sets the values for the card view from the data Dakota is including
+    @Override
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
         dateViewHolder.image.setImageResource(dateList.get(i).pic);
         dateViewHolder.name.setText(dateList.get(i).name);
-        //dateViewHolder.rating.setNumStars(dateList.get(i).rating);
+        dateViewHolder.itemView.setTag(dateList.get(i).name);
         dateViewHolder.rating.setRating(dateList.get(i).rating);
         dateViewHolder.date = dateList.get(i);
         dateViewHolder.miles.setText((dateList.get(i).getMiles() + " mi away"));
@@ -60,7 +60,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
 
         return new DateViewHolder(itemView);
     }
-
 
     public static class DateViewHolder extends RecyclerView.ViewHolder {
         protected CardView cv;
@@ -101,7 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(review1.getVisibility() == View.GONE)
+                    if(review1.getVisibility() == View.GONE && itemView.getTag() == name.getText())
                     {
                         review1.setVisibility(View.VISIBLE);
                         review2.setVisibility(View.VISIBLE);
@@ -109,20 +108,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
                         unexpand.setVisibility(View.VISIBLE);
 
                     }
-
                 }
             });
             unexpand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(review1.getVisibility() == View.VISIBLE)
+                    if(review1.getVisibility() == View.VISIBLE && itemView.getTag() == name.getText())
                     {
                         review1.setVisibility(View.GONE);
                         review2.setVisibility(View.GONE);
                         unexpand.setVisibility(View.GONE);
                         expand.setVisibility(View.VISIBLE);
                     }
-
                 }
             });
 
