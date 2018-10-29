@@ -252,6 +252,57 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     rv.setAdapter(ra);
                     return true;
                 }
+
+                else if (item.getTitle().toString().matches("Low to High Price"))
+                {
+                    oldList = new ArrayList<>((DateApp.getInstance().getDates()));
+                    newList.clear();
+                    for(int p = 1; p <= 3; p++)
+                    {
+                        for(int i = 0; i < oldList.size(); i++)
+                        {
+                            if(oldList.get(i).getPrice() == p)
+                            {
+                                newList.add(oldList.get(i));
+                            }
+                        }
+                    }
+                    rv = (RecyclerView) findViewById(R.id.recyclerView);
+                    rv.setHasFixedSize(true);
+                    llm = new LinearLayoutManager(getBaseContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(llm);
+                    ra = new RecyclerAdapter(newList);
+                    DateApp.getInstance().setDates(newList);
+                    rv.setAdapter(ra);
+                    return true;
+                }
+
+                else if (item.getTitle().toString().matches("High to Low Price"))
+                {
+                    oldList = new ArrayList<>((DateApp.getInstance().getDates()));
+                    newList.clear();
+                    for(int p = 3; p > 0; p--)
+                    {
+                        for(int i = 0; i < oldList.size(); i++)
+                        {
+                            if(oldList.get(i).getPrice() == p)
+                            {
+                                newList.add(oldList.get(i));
+                            }
+                        }
+                    }
+                    rv = (RecyclerView) findViewById(R.id.recyclerView);
+                    rv.setHasFixedSize(true);
+                    llm = new LinearLayoutManager(getBaseContext());
+                    llm.setOrientation(LinearLayoutManager.VERTICAL);
+                    rv.setLayoutManager(llm);
+                    ra = new RecyclerAdapter(newList);
+                    DateApp.getInstance().setDates(newList);
+                    rv.setAdapter(ra);
+                    return true;
+                }
+
                 else {
                    String itemTitle = item.getTitle().toString();
                    int filterNumber = 0;

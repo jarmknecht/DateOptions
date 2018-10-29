@@ -7,6 +7,12 @@
         android:id="@+id/highToLow"
         android:title="@string/high_to_low_stars"/>
     <item
+        android:id="@+id/priceLowToHigh"
+        android:title="Low to High Price"/>
+    <item
+        android:id="@+id/priceHighToLow"
+        android:title="High to Low Price"/>
+    <item
         android:title="@string/_5_mi_away"
         android:id="@+id/fivemi" />
     <item
