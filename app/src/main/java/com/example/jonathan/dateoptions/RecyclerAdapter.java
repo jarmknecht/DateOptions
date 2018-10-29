@@ -38,9 +38,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
     public void onBindViewHolder(DateViewHolder dateViewHolder, int i) {
         dateViewHolder.image.setImageResource(dateList.get(i).pic);
         dateViewHolder.name.setText(dateList.get(i).name);
-        dateViewHolder.itemView.setTag(dateList.get(i).name);
         dateViewHolder.rating.setRating(dateList.get(i).rating);
         dateViewHolder.date = dateList.get(i);
+        dateViewHolder.expand.setVisibility(View.VISIBLE);
+        dateViewHolder.unexpand.setVisibility(View.GONE);
+        dateViewHolder.review1.setVisibility(View.GONE);
+        dateViewHolder.review2.setVisibility(View.GONE);
         dateViewHolder.miles.setText((dateList.get(i).getMiles() + " mi away"));
         dateViewHolder.description.setText(dateList.get(i).getDescription());
         dateViewHolder.review1.setText(dateList.get(i).getReviews().get(dateList.get(i).getReviews().size()-1));
@@ -60,6 +63,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
 
         return new DateViewHolder(itemView);
     }
+
 
     public static class DateViewHolder extends RecyclerView.ViewHolder {
         protected CardView cv;
@@ -93,14 +97,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             unexpand = (ImageView)itemView.findViewById(R.id.unexpand);
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    //Toast.makeText(v.getContext(), "Clicked card", Toast.LENGTH_LONG).show();
                     ((MainActivity)v.getContext()).HandleClick(date);
                 }
             });
             expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(review1.getVisibility() == View.GONE && itemView.getTag() == name.getText())
+                    if(review1.getVisibility() == View.GONE)
                     {
                         review1.setVisibility(View.VISIBLE);
                         review2.setVisibility(View.VISIBLE);
@@ -113,7 +116,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
             unexpand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(review1.getVisibility() == View.VISIBLE && itemView.getTag() == name.getText())
+                    if(review1.getVisibility() == View.VISIBLE)
                     {
                         review1.setVisibility(View.GONE);
                         review2.setVisibility(View.GONE);
@@ -122,7 +125,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.DateVi
                     }
                 }
             });
-
         }
     }
 
