@@ -11,6 +11,7 @@ import android.database.MatrixCursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -85,10 +86,52 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
+                //This timer is since BYU network doesn't allow location services
+            new CountDownTimer(10000, 1000) {
 
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    if (spinner.getVisibility() == View.VISIBLE) {
+                        spinner.setVisibility(View.GONE);
+                        rv = (RecyclerView) findViewById(R.id.recyclerView);
+                        rv.setHasFixedSize(true);
+                        llm = new LinearLayoutManager(getBaseContext());
+                        llm.setOrientation(LinearLayoutManager.VERTICAL);
+                        rv.setLayoutManager(llm);
+                        ra = new RecyclerAdapter();
+                        rv.setAdapter(ra);
+                    }
+                }
+            }.start();
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, this);
         }
         else {
+            new CountDownTimer(10000, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    if (spinner.getVisibility() == View.VISIBLE) {
+                        spinner.setVisibility(View.GONE);
+                        rv = (RecyclerView) findViewById(R.id.recyclerView);
+                        rv.setHasFixedSize(true);
+                        llm = new LinearLayoutManager(getBaseContext());
+                        llm.setOrientation(LinearLayoutManager.VERTICAL);
+                        rv.setLayoutManager(llm);
+                        ra = new RecyclerAdapter();
+                        rv.setAdapter(ra);
+                    }
+                }
+            }.start();
             checkLocationPermission();
         }
 
