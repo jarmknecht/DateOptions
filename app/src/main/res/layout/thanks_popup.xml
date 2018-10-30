@@ -18,40 +18,17 @@
         android:paddingBottom="8dp"
         android:layout_margin="5dp">
 
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:stepSize="0.5"
-            android:paddingTop="11dp"
-            android:numStars="5"
-            android:id="@+id/popupRating" />
-
-        <EditText
-            android:id="@+id/userReview"
+        <TextView
+            android:id="@+id/thanks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/textbox"
-            android:ellipsize="start"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center_horizontal"
-            android:hint="@string/write_review_here"
+            android:text="@string/thanks_for_review"
             android:paddingTop="11dp"
             android:paddingBottom="11dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-
-        <Button
-            android:id="@+id/popupButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"
-            android:background="@drawable/roundedbutton"
-            android:text="@string/sumbitButtion"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

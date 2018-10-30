@@ -1,21 +1,28 @@
 package com.example.jonathan.dateoptions;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,6 +36,9 @@ import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
+
+import static android.widget.Toast.makeText;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,6 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RatingBar popupRating;
     private EditText userReview;
     private Button popupButton;
+    private TextView thanks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +66,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         date = (DateInfo) getIntent().getSerializableExtra("serialize_data");
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.review_popup, null);
+        final View popupView = inflater.inflate(R.layout.review_popup, null);
+        final View thankPopupView = inflater.inflate(R.layout.thanks_popup, null);
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow thanksPopup = new PopupWindow(thankPopupView, width, height, focusable);
+        thanks = (TextView)thankPopupView.findViewById(R.id.thanks);
         popupRating = (RatingBar)popupView.findViewById(R.id.popupRating);
         userReview = (EditText)popupView.findViewById(R.id.userReview);
         popupButton = (Button)popupView.findViewById(R.id.popupButton);
@@ -90,20 +104,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
                                 else if (userReview.getText().toString().matches("")) {
                                     DateApp.getInstance().getDates().get(i).addRating((int)popupRating.getRating());
+                                    /*thanksPopup.showAtLocation(view.getRootView(), Gravity.CENTER, 0, 0);
+                                    try {
+                                        TimeUnit.SECONDS.sleep(3);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    thanksPopup.dismiss();*/
+                                    Toast toast = Toast.makeText(getBaseContext(), "Review Received. Thank you!", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0,0);
+                                    toast.show();
                                     break;
                                 }
                                 else if (popupRating.getRating() == 0.0) {
                                     DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
+                                    Toast toast = Toast.makeText(getBaseContext(), "Review Received. Thank you!", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0,0);
+                                    toast.show();
                                     break;
                                 }
                                 else {
                                     DateApp.getInstance().getDates().get(i).addRating((int) popupRating.getRating());
                                     DateApp.getInstance().getDates().get(i).addReview(userReview.getText().toString());
+                                    Toast toast = Toast.makeText(getBaseContext(), "Review Received. Thank you!", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0,0);
+                                    toast.show();
                                     break;
                                 }
                             }
                         }
                         popupWindow.dismiss();
+
                         finish();
                     }
                 });
